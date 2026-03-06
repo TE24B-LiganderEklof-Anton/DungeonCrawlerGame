@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class EntityController : MonoBehaviour
@@ -9,25 +11,32 @@ public class EntityController : MonoBehaviour
     float desiredDistance = 5;
     [SerializeField]
     float moveSpeed = 1;
+    [SerializeField]
+    float maxAngle = 45;
+
     void FixedUpdate()
     {
         Vector2 positionOfTarget = testingTarget.transform.position;
-        float distanceToTargetEnemy = (positionOfTarget - (Vector2)transform.position).magnitude;
+        Vector2 distanceToTargetEnemy = positionOfTarget - (Vector2)transform.position;
 
-        //adjusts the moveToPosition to always be directly right or left of the target by the desiredDistance
         Vector2 moveToPosition = positionOfTarget;
-        if (transform.position.x <= positionOfTarget.x)
-        {
-            moveToPosition.x -= desiredDistance;
-        }
-        else
-        {
-            moveToPosition.x += desiredDistance;
-        }
+        // print(distanceToTargetEnemy.normalized.y);
 
-        //movement
-        if (distanceToTargetEnemy > desiredDistance)
+        float currentAngle = Mathf.Tan(distanceToTargetEnemy.y/distanceToTargetEnemy.x);
+        currentAngle = Mathf.Abs(currentAngle)*180/Mathf.PI;//convert from radians to positive degrees
+
+        bool isWithinAcceptableAngle = currentAngle < maxAngle;
+        print(currentAngle);
+        print(isWithinAcceptableAngle);
+
+        //moves if distance is too great or the angle beetween the entity and the target is too great.
+        if (distanceToTargetEnemy.magnitude > desiredDistance || !isWithinAcceptableAngle)
         {
+            //adjusts the moveToPosition to always be directly right or left of the target up to desiredRange
+            float xDistance = positionOfTarget.x - transform.position.x;
+            moveToPosition.x -= Mathf.Clamp(xDistance, -desiredDistance, desiredDistance);
+
+            //movement
             Vector2 moveVector = moveToPosition - (Vector2)transform.position;
             float moveMagnitude = moveVector.magnitude;
 

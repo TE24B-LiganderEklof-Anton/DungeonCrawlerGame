@@ -643,7 +643,7 @@ Transform:
   m_GameObject: {fileID: 724213695}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.303, y: -0.148, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1091,6 +1091,7 @@ MonoBehaviour:
   testingTarget: {fileID: 1602619927}
   desiredDistance: 1.5
   moveSpeed: 5
+  maxAngle: 45
 --- !u!212 &1481797444
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1264,8 +1265,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.25}
-    oldSize: {x: 0.75, y: 0.8125}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.1875, y: 0.203125}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1347,7 +1348,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2757142273063105033, guid: 323aaf897ff80ea41af873ab8b3f5d1d, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1368,7 +1369,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.92, y: 0.19, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1481,6 +1482,7 @@ MonoBehaviour:
   testingTarget: {fileID: 1481797440}
   desiredDistance: 5
   moveSpeed: 5
+  maxAngle: 45
 --- !u!50 &1602619932
 Rigidbody2D:
   serializedVersion: 5
