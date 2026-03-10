@@ -6,12 +6,14 @@ public class MovementHandler : MonoBehaviour
 {
     Vector2 moveToPosition;
     Rigidbody2D rigidBody;
+    Animator animator;
     bool active = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         moveToPosition = transform.position;
         rigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -36,21 +38,29 @@ public class MovementHandler : MonoBehaviour
                 rigidBody.linearVelocity = moveVector;
             }
     }
-
+    void Activate()
+    {
+        active = true;
+        animator.Play("Run");
+    }
+    void Deactivate()
+    {
+        active = false;
+        animator.Play("Idle");
+    }
     public void MoveTo(Vector2 position)
     {
         moveToPosition = position;
-        active = true;
+        Activate();
     }
     public void StopMovement()
     {
         rigidBody.linearVelocity = Vector2.zero;
         moveToPosition = transform.position;
-        active = false;
+        Deactivate();
     }
     public void MoveInDirection(Vector2 direction)
     {
-        moveToPosition = (Vector2)transform.position + direction.normalized*1000000;
-        active = true;
+        MoveTo((Vector2)transform.position + direction.normalized*100000);
     }
 }
