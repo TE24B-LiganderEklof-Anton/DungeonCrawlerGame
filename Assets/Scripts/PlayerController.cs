@@ -3,10 +3,19 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+
     Vector2 moveVector = Vector2.zero;
     void FixedUpdate()
     {
-        GetComponent<Rigidbody2D>().linearVelocity = moveVector*20;
+        if (moveVector.magnitude == 0)
+
+        {
+            GetComponent<MovementHandler>().StopMovement();
+        }
+        else
+        {
+            GetComponent<MovementHandler>().MoveInDirection(moveVector);
+        }
     }
     public void OnMove(InputValue input)
     {
