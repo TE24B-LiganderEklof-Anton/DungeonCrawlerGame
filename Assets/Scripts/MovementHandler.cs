@@ -42,6 +42,13 @@ public class MovementHandler : MonoBehaviour
     {
         active = true;
         animator.Play("Run");
+
+        int direction = 1;
+        if ((moveToPosition-(Vector2)transform.position).x < 0)
+        {
+            direction = -1;
+        }
+        GetComponent<EntityDirectionHandler>().SetRotation(direction);
     }
     void Deactivate()
     {
