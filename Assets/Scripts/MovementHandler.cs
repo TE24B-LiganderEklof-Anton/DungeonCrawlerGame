@@ -41,7 +41,7 @@ public class MovementHandler : MonoBehaviour
     void Activate()
     {
         active = true;
-        animator.Play("Run");
+        animator.SetBool("Running",true);
 
         int direction = 1;
         if ((moveToPosition-(Vector2)transform.position).x < 0)
@@ -53,7 +53,7 @@ public class MovementHandler : MonoBehaviour
     void Deactivate()
     {
         active = false;
-        animator.Play("Idle");
+        animator.SetBool("Running",false);
     }
     public void MoveTo(Vector2 position)
     {
