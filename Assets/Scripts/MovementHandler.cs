@@ -7,6 +7,7 @@ public class MovementHandler : MonoBehaviour
     Vector2 moveToPosition;
     Rigidbody2D rigidBody;
     Animator animator;
+    EntityDirectionHandler directionHandler;
     bool active = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,6 +15,7 @@ public class MovementHandler : MonoBehaviour
         moveToPosition = transform.position;
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        directionHandler = GetComponent<EntityDirectionHandler>();
     }
 
     // Update is called once per frame
@@ -21,21 +23,17 @@ public class MovementHandler : MonoBehaviour
     {
         if (!active) return;
 
-        //movement
             Vector2 moveVector = moveToPosition - (Vector2)transform.position;
-            float moveMagnitude = moveVector.magnitude;
-
-            moveVector = moveVector.normalized;
 
             //directly sets the position instead of using velocity if moveToPosition will be reached within one FixedUpdate to prevent overshooting.
-            if (moveMagnitude < (moveVector * Time.fixedDeltaTime).magnitude)
+            if (moveVector.magnitude < (moveVector * Time.fixedDeltaTime).magnitude)
             {
                 transform.position = moveToPosition;
                 StopMovement();
             }
             else
             {
-                rigidBody.linearVelocity = moveVector;
+                rigidBody.linearVelocity = moveVector.normalized;
             }
     }
     void Activate()
@@ -43,12 +41,15 @@ public class MovementHandler : MonoBehaviour
         active = true;
         animator.SetBool("Running",true);
 
-        int direction = 1;
+
         if ((moveToPosition-(Vector2)transform.position).x < 0)
         {
-            direction = -1;
+            directionHandler.SetRotation(-1);
         }
-        GetComponent<EntityDirectionHandler>().SetRotation(direction);
+        else if ((moveToPosition-(Vector2)transform.position).x > 0)
+        {
+            directionHandler.SetRotation(1);
+        }
     }
     void Deactivate()
     {

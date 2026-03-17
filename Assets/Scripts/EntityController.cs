@@ -10,9 +10,14 @@ public class EntityController : MonoBehaviour
     [SerializeField]
     float desiredDistance = 5;
     [SerializeField]
-    float moveSpeed = 1;
-    [SerializeField]
     float maxAngle = 45;
+    MovementHandler movementHandler;
+    AttackHandler attackHandler;
+    void Start()
+    {
+        movementHandler = GetComponent<MovementHandler>();
+        attackHandler = GetComponent<AttackHandler>();
+    }
 
     void FixedUpdate()
     {
@@ -33,11 +38,20 @@ public class EntityController : MonoBehaviour
             float xDistance = positionOfTarget.x - transform.position.x;
             moveToPosition.x -= Mathf.Clamp(xDistance, -desiredDistance, desiredDistance);
 
-            GetComponent<MovementHandler>().MoveTo(moveToPosition);
+            movementHandler.MoveTo(moveToPosition);
         }
         else
         {
-            GetComponent<MovementHandler>().StopMovement();
+            movementHandler.StopMovement();
+        }
+        //attacking
+        if (isWithinDesiredDistance)
+        {
+            attackHandler.BeginAttacking();
+        }
+        else
+        {
+            attackHandler.StopAttacking();
         }
     }
 }
