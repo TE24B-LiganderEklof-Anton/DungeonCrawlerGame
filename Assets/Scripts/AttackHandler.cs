@@ -12,8 +12,11 @@ public class AttackHandler : MonoBehaviour
     }
     public void MakeActive()
     {
-        animator.SetBool("Active", true);
-        ResetHits();
+        if (animator.GetBool("Attacking"))
+        {
+            animator.SetBool("Active", true);
+            ResetHits();
+        }
     }
     public void MakeDeactive()
     {
@@ -37,6 +40,13 @@ public class AttackHandler : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        print(collision.gameObject.name);
+        if (animator.GetBool("Active"))
+        {
+            HpHandler hpHandler = collision.gameObject.GetComponent<HpHandler>();
+            if (hpHandler != null){
+                hpHandler.ChangeHp(-10);
+            }
+
+        }
     }
 }

@@ -8,7 +8,7 @@ public class EntityController : MonoBehaviour
     [SerializeField]
     GameObject testingTarget;
     [SerializeField]
-    float desiredDistance = 5;
+    float desiredDistance = 1;
     [SerializeField]
     float maxAngle = 45;
     MovementHandler movementHandler;

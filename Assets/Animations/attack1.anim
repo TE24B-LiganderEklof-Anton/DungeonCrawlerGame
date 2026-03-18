@@ -5550,21 +5550,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.3
-    functionName: MakeDeactive
+  - time: 0.43333334
+    functionName: ResetHits
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.46666667
-    functionName: MakeActive
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.8333333
+  - time: 0.71666664
     functionName: MakeDeactive
     data: 
     objectReferenceParameter: {fileID: 0}
