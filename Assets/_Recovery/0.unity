@@ -345,10 +345,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Knight (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 6536952285042713989, guid: 5920ae1e8e6525a42812350e82d242a9, type: 3}
-      propertyPath: m_TagString
-      value: EnemyEntity
-      objectReference: {fileID: 0}
     - target: {fileID: 8098476919714462684, guid: 5920ae1e8e6525a42812350e82d242a9, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -3414,10 +3410,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6536952285042713989, guid: 5920ae1e8e6525a42812350e82d242a9, type: 3}
-      propertyPath: m_TagString
-      value: EnemyEntity
-      objectReference: {fileID: 0}
     - target: {fileID: 8098476919714462684, guid: 5920ae1e8e6525a42812350e82d242a9, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -4019,10 +4011,6 @@ PrefabInstance:
     - target: {fileID: 6536952285042713989, guid: 5920ae1e8e6525a42812350e82d242a9, type: 3}
       propertyPath: m_Name
       value: Knight
-      objectReference: {fileID: 0}
-    - target: {fileID: 6536952285042713989, guid: 5920ae1e8e6525a42812350e82d242a9, type: 3}
-      propertyPath: m_TagString
-      value: PlayerEntity
       objectReference: {fileID: 0}
     - target: {fileID: 8098476919714462684, guid: 5920ae1e8e6525a42812350e82d242a9, type: 3}
       propertyPath: m_Name

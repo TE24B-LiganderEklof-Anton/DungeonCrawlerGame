@@ -1,11 +1,12 @@
+using System.Linq;
 using System.Linq.Expressions;
 using Unity.VisualScripting;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-
     Vector2 moveVector = Vector2.zero;
     MovementHandler movementHandler;
     AttackHandler attackHandler;
@@ -14,7 +15,6 @@ public class PlayerController : MonoBehaviour
         movementHandler = GetComponent<MovementHandler>();
         attackHandler = GetComponent<AttackHandler>();
     }
-
     void FixedUpdate()
     {
         if (moveVector.magnitude == 0)
@@ -40,6 +40,23 @@ public class PlayerController : MonoBehaviour
         else
         {
             attackHandler.BeginAttacking();
+        }
+    }
+    public void OnAbility(InputValue input)
+    {
+        if (input.Get() == null) //input.Get() is always either null(released) or 1(pressed) do not ask me why
+        {
+            print("released");
+        }
+        else
+        {
+            int value = (int)(float)input.Get();//throws an exception when being cast directly to an int despite the inputsystem being set to outputting an integer, so convertion to float first is necessary.
+            //finds the corresponding playerEntity to call it's battle skill, will probably want to replace since, from my understanding, using tags this way might cause the array to be a different order at different times, especially after scene change
+            GameObject[] playerEntities = GameObject.FindGameObjectsWithTag("PlayerEntity");
+            GameObject targetEntity = playerEntities[value];
+
+            targetEntity.GetComponent<AbilityHandler>().BattleSkill();
+            
         }
     }
 }
