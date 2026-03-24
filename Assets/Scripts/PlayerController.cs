@@ -53,10 +53,12 @@ public class PlayerController : MonoBehaviour
             int value = (int)(float)input.Get();//throws an exception when being cast directly to an int despite the inputsystem being set to outputting an integer, so convertion to float first is necessary.
             //finds the corresponding playerEntity to call it's battle skill, will probably want to replace since, from my understanding, using tags this way might cause the array to be a different order at different times, especially after scene change
             GameObject[] playerEntities = GameObject.FindGameObjectsWithTag("PlayerEntity");
-            GameObject targetEntity = playerEntities[value];
+            if (value < playerEntities.Length)
+            {
+                GameObject targetEntity = playerEntities[value];
+                targetEntity.GetComponent<AbilityHandler>().BattleSkill();
+            }
 
-            targetEntity.GetComponent<AbilityHandler>().BattleSkill();
-            
         }
     }
 }

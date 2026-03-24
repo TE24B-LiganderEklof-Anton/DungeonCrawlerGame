@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,9 +7,22 @@ public class AttackHandler : MonoBehaviour
 
     List<GameObject> hits = new();
     Animator animator;
+    List<Collider2D> collidersInTrigger = new();
     void Start()
     {
         animator = GetComponent<Animator>();
+    }
+    public void Hit(Collider2D collision)
+    {
+        if (animator.GetBool("Active"))
+        {
+            HpHandler hpHandler = collision.gameObject.GetComponent<HpHandler>();
+            if (hpHandler != null)
+            {
+                hpHandler.ChangeHp(-10);
+            }
+
+        }
     }
     public void MakeActive()
     {
@@ -24,7 +38,10 @@ public class AttackHandler : MonoBehaviour
     }
     public void ResetHits()
     {
-        hits.Clear();
+        foreach (Collider2D collider in collidersInTrigger)
+        {
+            Hit(collider);
+        }
     }
     public void BeginAttacking()
     {
@@ -40,13 +57,11 @@ public class AttackHandler : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (animator.GetBool("Active"))
-        {
-            HpHandler hpHandler = collision.gameObject.GetComponent<HpHandler>();
-            if (hpHandler != null){
-                hpHandler.ChangeHp(-10);
-            }
-
-        }
+        collidersInTrigger.Add(collision);
+        Hit(collision);
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        collidersInTrigger.Remove(collision);
     }
 }
