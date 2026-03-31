@@ -24,28 +24,28 @@ public class AttackHandler : MonoBehaviour
 
         }
     }
-    public void MakeActive()
+    public void MakeActive() //makes the trigger able to detect collisions and deal damage, called at the beginning of a attack
     {
         if (animator.GetBool("Attacking"))
         {
             animator.SetBool("Active", true);
-            ResetHits();
         }
     }
-    public void MakeDeactive()
+    public void MakeDeactive()// makes the trigger unable to detect collisions, called at the end of an attack.
     {
         animator.SetBool("Active", false);
     }
-    public void ResetHits()
+    public void ResetHits()//called when a new attack begins without any downtime from the prevvious.
     {
+        //hits all enemies currently in the trigger.
         foreach (Collider2D collider in collidersInTrigger)
         {
             Hit(collider);
         }
     }
-    public void BeginAttacking()
+    public void BeginAttacking() 
     {
-        if (!animator.GetBool("Attacking") && !animator.GetBool("Active"))
+        if (!animator.GetBool("Attacking") && !animator.GetBool("Active"))//verifies that the entity isn't already attacking
         {
             animator.SetTrigger("BeginAttacking");
         }

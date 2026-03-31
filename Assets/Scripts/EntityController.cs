@@ -21,12 +21,15 @@ public class EntityController : MonoBehaviour
 
     void FixedUpdate()
     {
+        //position
         Vector2 positionOfTarget = testingTarget.transform.position;
         Vector2 moveToPosition = positionOfTarget;
 
+        //distance
         Vector2 distanceToTargetEnemy = positionOfTarget - (Vector2)transform.position;
-        bool isWithinDesiredDistance = distanceToTargetEnemy.magnitude < desiredDistance;
+        bool isWithinDesiredDistance = distanceToTargetEnemy.magnitude <= desiredDistance;
 
+        //angles
         float currentAngle = Mathf.Tan(distanceToTargetEnemy.y/distanceToTargetEnemy.x);
         currentAngle = Mathf.Abs(currentAngle)*180/Mathf.PI;//convert from radians to positive degrees
         bool isWithinAcceptableAngle = currentAngle < maxAngle;

@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class PriorityHandler<T> : MonoBehaviour
+{
+    Dictionary<string,(float,T)> priorities = new();
+    float currentPriority = 0;
+    T defaultValue = default;
+    T currentValue;
+    
+    Action<T> onValueChange;
+
+    public PriorityHandler(Action<T> onValueChangeFunc, T default_)
+    {
+        onValueChange = onValueChangeFunc;
+        defaultValue = default_;
+        currentValue = defaultValue;
+    }
+
+    (float, T) FindHighestPriority()
+    {
+        float highestPriority = 0;
+        T highestPriorityValue = defaultValue;
+        foreach ((float priority, T value) in priorities.Values)
+        {
+            if (priority > highestPriority)
+            {
+                highestPriority = priority;
+                highestPriorityValue = value;
+            }
+        }
+        return (highestPriority,highestPriorityValue);
+    }
+
+    void UpdateCurrent()
+    {
+        (float newPriority,T newValue) = FindHighestPriority();
+        if (!EqualityComparer<T>.Default.Equals(currentValue, newValue))
+        {
+            onValueChange(newValue);
+        }
+        currentPriority = newPriority;
+        currentValue = newValue;
+    }
+    public void SetPriority(string key, float priority, T value)
+    {
+        priorities[key] = (priority, value);
+        UpdateCurrent();
+    }
+
+}
+
+

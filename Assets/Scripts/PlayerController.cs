@@ -46,12 +46,12 @@ public class PlayerController : MonoBehaviour
     {
         if (input.Get() == null) //input.Get() is always either null(released) or 1(pressed) do not ask me why
         {
-            print("released");
+            // print("released");
         }
         else
         {
             int value = (int)(float)input.Get();//throws an exception when being cast directly to an int despite the inputsystem being set to outputting an integer, so convertion to float first is necessary.
-            //finds the corresponding playerEntity to call it's battle skill, will probably want to replace since, from my understanding, using tags this way might cause the array to be a different order at different times, especially after scene change
+            //finds the corresponding playerEntity to call it's battle skill, will probably want to replace since, from my understanding, using tags this way might cause the array to be a different order at different times, atleast after scene change
             GameObject[] playerEntities = GameObject.FindGameObjectsWithTag("PlayerEntity");
             if (value < playerEntities.Length)
             {
