@@ -55,9 +55,6 @@ public class MovementHandler : MonoBehaviour
         float totalMult = timedMoveSpeedMult * moveSpeed;
         Vector2 moveVector = distance.normalized * totalMult; //causes problems because the normalized siatnce becomes zero due to being too small
 
-
-        print(distance.magnitude);
-        print((moveVector * Time.fixedDeltaTime).magnitude);
         //directly sets the position instead of using velocity if moveToPosition will be reached within one FixedUpdate to prevent overshooting.
         if (distance.magnitude < 0.0001f || distance.magnitude <= (moveVector * Time.fixedDeltaTime).magnitude)
         {
@@ -122,10 +119,33 @@ public class MovementHandler : MonoBehaviour
         blockMoveTo = true;
         handleMovement = TimedMove;
     }
-    public void TimedMoveToDistance(Vector2 position, float time, float desiredDistance)
+    public void TimedMoveToDistance(Vector2 position, float time, float desiredDistance, float maxAngle)
     {
+        maxAngle *= Mathf.Deg2Rad;//convert the angle to radians
+
         Vector2 currentDistance = position - (Vector2)transform.position;
-        Vector2 targetPosition = position - (currentDistance.normalized*desiredDistance);
-        TimedMoveTo(targetPosition,time);
+
+        float angle = Mathf.Atan(currentDistance.y / currentDistance.x);//calculates the current angle
+        angle = Mathf.Clamp(angle, -maxAngle, maxAngle);//clamp to get the angle it needs to move to
+        float proportion = Mathf.Tan(angle); // is y/x
+
+        //creates and normalizes a vector based the y/x proprtion to get the normalized proportions
+        Vector2 proportionateVector = new(1, proportion);
+        proportionateVector.Normalize();
+
+        if (currentDistance.x > 0)
+        {
+            // print("AAAA");
+        }
+        else
+        {
+            proportionateVector *= -1;
+            // angle = Mathf.Clamp(angle, -maxAngle, maxAngle);//clamp to get the angle it needs to move to
+        }
+
+
+
+        Vector2 targetPosition = position - (proportionateVector * desiredDistance);
+        TimedMoveTo(targetPosition, time);
     }
 }

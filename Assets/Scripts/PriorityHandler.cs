@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PriorityHandler<T> : MonoBehaviour
+public class PriorityHandler<T>
 {
     Dictionary<string,(float,T)> priorities = new();
     float currentPriority = 0;
@@ -21,7 +21,7 @@ public class PriorityHandler<T> : MonoBehaviour
         currentValue = defaultValue;
     }
 
-    (float, T) FindHighestPriority()
+    (float, T) FindHighest()
     {
         float highestPriority = 0;
         T highestPriorityValue = defaultValue;
@@ -38,7 +38,7 @@ public class PriorityHandler<T> : MonoBehaviour
 
     void UpdateCurrent()
     {
-        (float newPriority,T newValue) = FindHighestPriority();
+        (float newPriority,T newValue) = FindHighest();
         if (!EqualityComparer<T>.Default.Equals(currentValue, newValue))
         {
             onValueChange(newValue);
@@ -51,7 +51,4 @@ public class PriorityHandler<T> : MonoBehaviour
         priorities[key] = (priority, value);
         UpdateCurrent();
     }
-
 }
-
-
