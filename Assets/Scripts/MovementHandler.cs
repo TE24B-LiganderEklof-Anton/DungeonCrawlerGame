@@ -133,12 +133,8 @@ public class MovementHandler : MonoBehaviour
         Vector2 proportionateVector = new(1, proportion);
         proportionateVector.Normalize();
 
-        if (currentDistance.x > 0)
-        {
-            // print("AAAA");
-        }
-        else
-        {
+        if (currentDistance.x < 0){
+  
             proportionateVector *= -1;
             // angle = Mathf.Clamp(angle, -maxAngle, maxAngle);//clamp to get the angle it needs to move to
         }

@@ -5,11 +5,22 @@ public class KnightAbilityHandler : AbilityHandler
 {
     public override void BattleSkill()
     {
-        entityDirectionHandler.priorityHandler.SetPriority("KnightBattleSkill", 10, 1);
         animator.SetTrigger("BattleSkill");
-        GameObject targetEntity = Toolbox.FindClosestWithTag(transform.position, targetTag);
+        if (!isPlayer)
+        {
+            GameObject targetEntity = Toolbox.FindClosestWithTag(transform.position, targetTag);
+            Vector2 targetPosition = targetEntity.transform.position;
+            movementHandler.TimedMoveToDistance(targetPosition, 0.1f, 2, 45);   
+        }
+    }
 
-        Vector2 targetPosition = targetEntity.transform.position;
-        movementHandler.TimedMoveToDistance(targetPosition,0.1f, 2, 45);
+    //called via animation events
+    public void BattleSkillSwingStart()
+    {
+        weaponAnimator.Play("KnightSwordFlame");
+    }
+    public void BattleSkillSwingEnd()
+    {
+        weaponAnimator.Play("KnightSwordIdle");
     }
 }
