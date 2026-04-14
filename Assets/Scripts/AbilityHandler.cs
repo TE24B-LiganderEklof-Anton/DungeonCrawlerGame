@@ -7,8 +7,9 @@ public class AbilityHandler : MonoBehaviour
     protected MovementHandler movementHandler;
     protected Animator animator;
     protected EntityDirectionHandler entityDirectionHandler;
-    GameObject weapon;
     protected Animator weaponAnimator;
+    protected HitBoxHandler hitBoxHandler;
+    GameObject weapon;
     protected bool isPlayer;
 
     void Awake()
@@ -19,6 +20,7 @@ public class AbilityHandler : MonoBehaviour
         entityDirectionHandler = GetComponent<EntityDirectionHandler>();
         weapon = transform.Find("Torso").transform.Find("RightShoulder").transform.Find("RightArm").transform.Find("Weapon").gameObject;
         weaponAnimator = weapon.GetComponent<Animator>();
+        hitBoxHandler = GetComponent<HitBoxHandler>();
         if (GetComponent<PlayerController>() == null)
         {
             isPlayer = false;

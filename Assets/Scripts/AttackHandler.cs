@@ -8,32 +8,33 @@ public class AttackHandler : MonoBehaviour
     List<GameObject> hits = new();
     Animator animator;
     List<Collider2D> collidersInTrigger = new();
+    HitBoxHandler hitBoxHandler;
     void Start()
     {
         animator = GetComponent<Animator>();
+        hitBoxHandler = GetComponent<HitBoxHandler>();
     }
     public void Hit(Collider2D collision)
     {
-        if (animator.GetBool("Active"))
-        {
+        print("attack hit");
             HpHandler hpHandler = collision.gameObject.GetComponent<HpHandler>();
             if (hpHandler != null)
             {
                 hpHandler.ChangeHp(-10);
             }
-
-        }
     }
     public void MakeActive() //makes the trigger able to detect collisions and deal damage, called at the beginning of a attack
     {
-        if (animator.GetBool("Attacking"))
+        if (animator.GetBool("Attacking"))//this method can sometimes be called whilst transitioning to the idle animation and not actively attcking, must therefor double check
         {
             animator.SetBool("Active", true);
+            hitBoxHandler.Bind(Hit);
         }
     }
     public void MakeDeactive()// makes the trigger unable to detect collisions, called at the end of an attack.
     {
         animator.SetBool("Active", false);
+        hitBoxHandler.Unbind(Hit);
     }
     public void ResetHits()//called when a new attack begins without any downtime from the prevvious.
     {
@@ -55,13 +56,13 @@ public class AttackHandler : MonoBehaviour
     {
         animator.SetBool("Attacking", false);
     }
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        collidersInTrigger.Add(collision);
-        Hit(collision);
-    }
-    void OnTriggerExit2D(Collider2D collision)
-    {
-        collidersInTrigger.Remove(collision);
-    }
+    // void OnTriggerEnter2D(Collider2D collision)
+    // {
+    //     collidersInTrigger.Add(collision);
+    //     Hit(collision);
+    // }
+    // void OnTriggerExit2D(Collider2D collision)
+    // {
+    //     collidersInTrigger.Remove(collision);
+    // }
 }

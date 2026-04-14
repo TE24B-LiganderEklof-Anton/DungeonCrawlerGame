@@ -4008,6 +4008,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6536952285042713989, guid: 5920ae1e8e6525a42812350e82d242a9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6233427697481138772}
+    - targetCorrespondingSourceObject: {fileID: 6536952285042713989, guid: 5920ae1e8e6525a42812350e82d242a9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6233427697481138781}
     - targetCorrespondingSourceObject: {fileID: 6026978531562910469, guid: 5920ae1e8e6525a42812350e82d242a9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 40717519}
@@ -4055,6 +4058,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c48f992a19cee8499e8ce30cd27e017, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KnightAbilityHandler
+--- !u!114 &6233427697481138781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6233427697481138753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 178139a3e9379ef4f87e1e7b7c038135, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitBoxHandler
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
