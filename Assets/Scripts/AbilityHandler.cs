@@ -9,10 +9,11 @@ public class AbilityHandler : MonoBehaviour
     protected EntityDirectionHandler entityDirectionHandler;
     protected Animator weaponAnimator;
     protected HitBoxHandler hitBoxHandler;
+    protected ManaHandler manaHandler;
     GameObject weapon;
     protected bool isPlayer;
 
-    void Awake()
+    void Start()
     {
         movementHandler = GetComponent<MovementHandler>();
         targetTag = Toolbox.GetEnemyTag(this.gameObject.tag);
@@ -21,6 +22,7 @@ public class AbilityHandler : MonoBehaviour
         weapon = transform.Find("Torso").transform.Find("RightShoulder").transform.Find("RightArm").transform.Find("Weapon").gameObject;
         weaponAnimator = weapon.GetComponent<Animator>();
         hitBoxHandler = GetComponent<HitBoxHandler>();
+        manaHandler = Toolbox.manaHandler;//really whack will fix
         if (GetComponent<PlayerController>() == null)
         {
             isPlayer = false;

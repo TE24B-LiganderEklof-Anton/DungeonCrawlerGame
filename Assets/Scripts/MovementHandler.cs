@@ -133,13 +133,10 @@ public class MovementHandler : MonoBehaviour
         Vector2 proportionateVector = new(1, proportion);
         proportionateVector.Normalize();
 
+        //mirrors the vector if the entitiy needs to move to the left to account for needing to move to the right side of the enemy instead of the left
         if (currentDistance.x < 0){
-  
             proportionateVector *= -1;
-            // angle = Mathf.Clamp(angle, -maxAngle, maxAngle);//clamp to get the angle it needs to move to
         }
-
-
 
         Vector2 targetPosition = position - (proportionateVector * desiredDistance);
         TimedMoveTo(targetPosition, time);

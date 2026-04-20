@@ -16,7 +16,6 @@ public class AttackHandler : MonoBehaviour
     }
     public void Hit(Collider2D collision)
     {
-        print("attack hit");
             HpHandler hpHandler = collision.gameObject.GetComponent<HpHandler>();
             if (hpHandler != null)
             {
@@ -38,11 +37,7 @@ public class AttackHandler : MonoBehaviour
     }
     public void ResetHits()//called when a new attack begins without any downtime from the prevvious.
     {
-        //hits all enemies currently in the trigger.
-        foreach (Collider2D collider in collidersInTrigger)
-        {
-            Hit(collider);
-        }
+        hitBoxHandler.FireCollisions(Hit);
     }
     public void BeginAttacking() 
     {
@@ -56,13 +51,4 @@ public class AttackHandler : MonoBehaviour
     {
         animator.SetBool("Attacking", false);
     }
-    // void OnTriggerEnter2D(Collider2D collision)
-    // {
-    //     collidersInTrigger.Add(collision);
-    //     Hit(collision);
-    // }
-    // void OnTriggerExit2D(Collider2D collision)
-    // {
-    //     collidersInTrigger.Remove(collision);
-    // }
 }

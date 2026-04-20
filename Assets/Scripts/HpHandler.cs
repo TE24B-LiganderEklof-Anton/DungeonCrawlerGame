@@ -7,7 +7,7 @@ public class HpHandler : MonoBehaviour
 {
     [SerializeField]
     float maxHp = 100;
-    public float currentHp;
+    float currentHp;
     Slider hpSlider;
     void Start()
     {

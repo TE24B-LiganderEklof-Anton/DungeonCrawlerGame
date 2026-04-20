@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Toolbox : MonoBehaviour
 {
+    [SerializeField]
+    GameObject manaHandlerObject;
+    public static ManaHandler manaHandler;
+    void Awake()
+    {
+        manaHandler = manaHandlerObject.GetComponent<ManaHandler>();
+    }
     public static String GetEnemyTag(string tag)
     {
         string enemyTag = null;

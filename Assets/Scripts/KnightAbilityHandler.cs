@@ -5,6 +5,7 @@ public class KnightAbilityHandler : AbilityHandler
 {
     public override void BattleSkill()
     {
+        if (!manaHandler.UseMana(30)) return;
         animator.SetTrigger("BattleSkill");
         if (!isPlayer)
         {
@@ -15,11 +16,15 @@ public class KnightAbilityHandler : AbilityHandler
     }
     void BattleSkillHit(Collider2D collision)
     {
-        print("battleskill hit");
         HpHandler hpHandler = collision.gameObject.GetComponent<HpHandler>();
         if (hpHandler != null)
         {
             hpHandler.ChangeHp(-30);
+        }
+        ElementHandler elementHandler = collision.gameObject.GetComponent<ElementHandler>();
+        if (elementHandler != null)
+        {
+            elementHandler.Add(Elements.fire, 1);
         }
     }
     //called via animation events

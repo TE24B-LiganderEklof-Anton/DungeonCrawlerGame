@@ -1200,7 +1200,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.35
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3114,6 +3114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4467a1b005b1904bab4106142032deb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ManaHandler
+  maxMana: 100
+  regenRate: 5
 --- !u!4 &1625803050
 Transform:
   m_ObjectHideFlags: 0

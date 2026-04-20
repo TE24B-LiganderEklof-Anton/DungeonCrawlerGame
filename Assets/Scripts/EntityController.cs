@@ -1,28 +1,32 @@
 using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EntityController : MonoBehaviour
 {
-    [SerializeField]
-    GameObject testingTarget;
     [SerializeField]
     float desiredDistance = 1;
     [SerializeField]
     float maxAngle = 45;
     MovementHandler movementHandler;
     AttackHandler attackHandler;
+    string targetTag;
     void Start()
     {
         movementHandler = GetComponent<MovementHandler>();
         attackHandler = GetComponent<AttackHandler>();
+        targetTag = Toolbox.GetEnemyTag(this.tag);
     }
 
     void FixedUpdate()
     {
+        //acquire target
+        GameObject targetEntity = Toolbox.FindClosestWithTag(transform.position,targetTag);
+
         //position
-        Vector2 positionOfTarget = testingTarget.transform.position;
+        Vector2 positionOfTarget = targetEntity.transform.position;
         Vector2 moveToPosition = positionOfTarget;
 
         //distance
