@@ -7,7 +7,7 @@ public class ManaHandler : MonoBehaviour
     [SerializeField]
     float maxMana = 100;
     [SerializeField]
-    float regenRate = 5;
+    float regenRate = 50;
     float currentMana;
     Slider slider;
 

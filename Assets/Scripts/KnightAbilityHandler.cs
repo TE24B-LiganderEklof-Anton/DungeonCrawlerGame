@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class KnightAbilityHandler : AbilityHandler
@@ -12,6 +13,7 @@ public class KnightAbilityHandler : AbilityHandler
             GameObject targetEntity = Toolbox.FindClosestWithTag(transform.position, targetTag);
             Vector2 targetPosition = targetEntity.transform.position;
             movementHandler.TimedMoveToDistance(targetPosition, 0.1f, 2, 45);
+            entityDirectionHandler.LookAtPosition(targetPosition, "KnightBattleSkill", 100);
         }
     }
     void BattleSkillHit(Collider2D collision)
@@ -37,5 +39,6 @@ public class KnightAbilityHandler : AbilityHandler
     {
         weaponAnimator.Play("KnightSwordIdle");
         hitBoxHandler.Unbind(BattleSkillHit);
+        entityDirectionHandler.priorityHandler.SetPriority("KnightBattleSkill",0,1);
     }
 }

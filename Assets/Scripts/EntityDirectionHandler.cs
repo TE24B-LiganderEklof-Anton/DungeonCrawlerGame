@@ -21,6 +21,19 @@ public class EntityDirectionHandler : MonoBehaviour
 
         priorityHandler = new(SetRotation,1);
     }
+    public void LookAtPosition(Vector2 pos, string key, float priority)
+    {
+        int dir;
+        if (pos.x > transform.position.x)
+        {
+            dir = 1;
+        }
+        else
+        {
+            dir = -1;
+        }
+        priorityHandler.SetPriority(key, priority, dir);
+    }
     void SetRotation(int rotation)
     {
         //uses absolute value to make it not always mirror when set to -1, has the downside of only working if the default X is positive

@@ -69,7 +69,7 @@ public class ElementHandler : MonoBehaviour
             GameObject icon = Instantiate(prefab);
             icon.transform.SetParent(statusIconContainer.transform,false);
 
-            print(icon.name);
+            //write current amount to amountText
             TextMeshProUGUI amountText = icon.GetComponentInChildren<TextMeshProUGUI>();
             amountText.text = pair.Value.ToString();
         }
@@ -78,7 +78,6 @@ public class ElementHandler : MonoBehaviour
     {
         print("PlaceHolder Reaction");
     }
-
 
     void CheckForReactions()
     {
