@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,8 +8,12 @@ public class ElementHandler : MonoBehaviour
 {
     Dictionary<Elements, int> appliedElements = new();
     Dictionary<Elements, Dictionary<Elements, Action<int>>> reactionMatrix;
+    GameObject statusIconContainer;
+
     void Start()
     {
+        statusIconContainer = transform.Find("Canvas").Find("StatusIcons").gameObject;
+
         reactionMatrix = new()
     {
         {Elements.fire, new Dictionary<Elements, Action<int>>()
@@ -45,10 +50,35 @@ public class ElementHandler : MonoBehaviour
         }
     };
     }
+    void UpdateIcons()
+    {
+        //clear all current icons
+        foreach (Transform transform in statusIconContainer.GetComponentsInChildren<Transform>())
+        {
+            if (transform.gameObject == statusIconContainer)
+            {
+                continue;
+            }
+            Destroy(transform.gameObject);
+        }
+        //
+        //add icons for AppliedElements
+        foreach (KeyValuePair<Elements,int> pair in appliedElements)
+        {
+            GameObject prefab = Toolbox.ElementIconsPrefabDict[pair.Key];
+            GameObject icon = Instantiate(prefab);
+            icon.transform.SetParent(statusIconContainer.transform,false);
+
+            print(icon.name);
+            TextMeshProUGUI amountText = icon.GetComponentInChildren<TextMeshProUGUI>();
+            amountText.text = pair.Value.ToString();
+        }
+    }
     void Placeholder(int test)
     {
         print("PlaceHolder Reaction");
     }
+
 
     void CheckForReactions()
     {
@@ -74,13 +104,13 @@ public class ElementHandler : MonoBehaviour
         if (appliedElements.ContainsKey(element))
         {
             appliedElements[element] += amount;
-            // print(appliedElements[element]);
         }
         else
         {
             appliedElements.Add(element, amount);
         }
         CheckForReactions();
+        UpdateIcons();
     }
 }
 
