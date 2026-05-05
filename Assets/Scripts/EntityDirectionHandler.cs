@@ -21,6 +21,7 @@ public class EntityDirectionHandler : MonoBehaviour
 
         priorityHandler = new(SetRotation,1);
     }
+    //looks towards the given point
     public void LookAtPosition(Vector2 pos, string key, float priority)
     {
         int dir;
@@ -34,6 +35,8 @@ public class EntityDirectionHandler : MonoBehaviour
         }
         priorityHandler.SetPriority(key, priority, dir);
     }
+
+    //sets the localscale.x to the given "rotation"
     void SetRotation(int rotation)
     {
         //uses absolute value to make it not always mirror when set to -1, has the downside of only working if the default X is positive

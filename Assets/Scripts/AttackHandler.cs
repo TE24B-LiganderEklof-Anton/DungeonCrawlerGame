@@ -14,6 +14,7 @@ public class AttackHandler : MonoBehaviour
         animator = GetComponent<Animator>();
         hitBoxHandler = GetComponent<HitBoxHandler>();
     }
+    //gets bound to HitBoxHandler 
     public void Hit(Collider2D collision)
     {
             HpHandler hpHandler = collision.gameObject.GetComponent<HpHandler>();
@@ -22,6 +23,7 @@ public class AttackHandler : MonoBehaviour
                 hpHandler.ChangeHp(-10);
             }
     }
+    //called by animation events
     public void MakeActive() //makes the trigger able to detect collisions and deal damage, called at the beginning of a attack
     {
         if (animator.GetBool("Attacking"))//this method can sometimes be called whilst transitioning to the idle animation and not actively attcking, must therefor double check
@@ -39,6 +41,8 @@ public class AttackHandler : MonoBehaviour
     {
         hitBoxHandler.FireCollisions(Hit);
     }
+
+    //used by other scripts
     public void BeginAttacking() 
     {
         if (!animator.GetBool("Attacking") && !animator.GetBool("Active"))//verifies that the entity isn't already attacking

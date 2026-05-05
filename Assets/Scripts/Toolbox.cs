@@ -34,11 +34,13 @@ public class Toolbox : MonoBehaviour
     }
     public static String GetEnemyTag(string tag)
     {
-        string enemyTag = null;
-        if (tag == "PlayerEntity") enemyTag = "EnemyEntity";
-        else enemyTag = "PlayerEntity";
+        return tag == "PlayerEntity" ? "EnemyEntity" : "PlayerEntity";
 
-        return enemyTag;
+        // string enemyTag = null;
+        // if (tag == "PlayerEntity") enemyTag = "EnemyEntity";
+        // else enemyTag = "PlayerEntity";
+
+        // return enemyTag;
     }
     public static GameObject FindClosestWithTag(Vector2 position, string tag)
     {
