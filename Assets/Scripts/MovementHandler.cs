@@ -1,9 +1,5 @@
 using System;
-using System.Runtime.CompilerServices;
-using Unity.Mathematics;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class MovementHandler : MonoBehaviour
 {
