@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ManaHandler : MonoBehaviour
+public class ManaHandler : MonoBehaviour// handles regeneration and usage of mana
 {
     [SerializeField]
     float maxMana = 100;
@@ -13,36 +13,37 @@ public class ManaHandler : MonoBehaviour
     void Awake()
     {
         currentMana = maxMana;
+        //apply value to ui
         slider = transform.Find("Canvas").Find("Slider").GetComponent<Slider>();
         slider.maxValue = maxMana;
         slider.value = currentMana;
     }
     void Update()
     {
-        if (currentMana < maxMana)
+        if (currentMana < maxMana)// increase mana if below max, and update ui
         {
             currentMana += regenRate * Time.deltaTime;
             slider.value = currentMana;
         }
-        if (currentMana > maxMana)
+        if (currentMana > maxMana)//decrease mana if above max, and update ui
         {
             currentMana = maxMana;
             slider.value = currentMana;
         }
     }
     public bool UseMana(float amount)
-{
-    if (currentMana >= amount)
     {
-        currentMana -= amount;
-        slider.value = currentMana;
-        return true;
+        if (currentMana >= amount)
+        {
+            currentMana -= amount;
+            slider.value = currentMana;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
-    else
-    {
-        return false;
-    }
-}
 }
 
 

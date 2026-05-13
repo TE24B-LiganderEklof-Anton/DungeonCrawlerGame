@@ -13,7 +13,8 @@ public class AmaranthAbilityHandler : AbilityHandler
             Vector2 targetPos = playerPos + difference.normalized;
             movementHandler.TimedMoveTo(targetPos, 0.25f);
         }
-        
+
+        //begin blocking
         animator.SetTrigger("BattleSkill");
         eventHandler.wasHit.Bind(OnWasHit);
     }

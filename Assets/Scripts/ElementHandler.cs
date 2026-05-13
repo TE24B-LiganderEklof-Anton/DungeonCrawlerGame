@@ -4,7 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ElementHandler : MonoBehaviour
+public class ElementHandler : MonoBehaviour //handles application of elements and (at some point in the futute) triggering of elemental reactions
 {
     Dictionary<Elements, int> appliedElements = new();
     Dictionary<Elements, Dictionary<Elements, Action<int>>> reactionMatrix;
@@ -63,11 +63,11 @@ public class ElementHandler : MonoBehaviour
         }
         //
         //add icons for AppliedElements
-        foreach (KeyValuePair<Elements,int> pair in appliedElements)
+        foreach (KeyValuePair<Elements, int> pair in appliedElements)
         {
             GameObject prefab = Toolbox.ElementIconsPrefabDict[pair.Key];
             GameObject icon = Instantiate(prefab);
-            icon.transform.SetParent(statusIconContainer.transform,false);
+            icon.transform.SetParent(statusIconContainer.transform, false);
 
             //write current amount to amountText
             TextMeshProUGUI amountText = icon.GetComponentInChildren<TextMeshProUGUI>();
@@ -95,6 +95,8 @@ public class ElementHandler : MonoBehaviour
         //remove elements
         appliedElements.Remove(element1);
         appliedElements.Remove(element2);
+
+        UpdateIcons();
     }
 
     public void Add(Elements element, int amount)

@@ -11,7 +11,7 @@ public class Toolbox : MonoBehaviour
     public static ManaHandler manaHandler;
     [SerializeField]
     Folder ElementIconsFolder;
-    public static Dictionary<Elements,GameObject> ElementIconsPrefabDict;
+    public static Dictionary<Elements, GameObject> ElementIconsPrefabDict;
     [SerializeField]
     GameObject FireIconPrefab;
     [SerializeField]
@@ -35,23 +35,20 @@ public class Toolbox : MonoBehaviour
     public static String GetEnemyTag(string tag)
     {
         return tag == "PlayerEntity" ? "EnemyEntity" : "PlayerEntity";
-
-        // string enemyTag = null;
-        // if (tag == "PlayerEntity") enemyTag = "EnemyEntity";
-        // else enemyTag = "PlayerEntity";
-
-        // return enemyTag;
     }
     public static GameObject FindClosestWithTag(Vector2 position, string tag)
     {
         GameObject[] array = GameObject.FindGameObjectsWithTag(tag);
 
+        //start with nothing selected and distance as infinte, since then everything will be closer
         GameObject selected = null;
         float selectedDistance = math.INFINITY;
 
+        //loop through all gameObjects with tag
         foreach (GameObject gameObject in array)
         {
             float distance = ((Vector2)gameObject.transform.position - position).magnitude;
+            //if closer than pervious, set as selected
             if (distance < selectedDistance)
             {
                 selected = gameObject;

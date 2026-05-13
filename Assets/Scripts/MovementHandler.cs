@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class MovementHandler : MonoBehaviour
+public class MovementHandler : MonoBehaviour// used for moving the entity
 {
     Action handleMovement;
     Vector2 moveToPosition;
@@ -129,7 +129,8 @@ public class MovementHandler : MonoBehaviour
         proportionateVector.Normalize();
 
         //mirrors the vector if the entitiy needs to move to the left to account for needing to move to the right side of the enemy instead of the left
-        if (currentDistance.x < 0){
+        if (currentDistance.x < 0)
+        {
             proportionateVector *= -1;
         }
 

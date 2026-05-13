@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EntityController : MonoBehaviour
+public class EntityController : MonoBehaviour// handles movement and attacking for non player entities
 {
     [SerializeField]
     float desiredDistance = 1;
@@ -19,7 +19,7 @@ public class EntityController : MonoBehaviour
     void FixedUpdate()
     {
         //acquire target
-        GameObject targetEntity = Toolbox.FindClosestWithTag(transform.position,targetTag);
+        GameObject targetEntity = Toolbox.FindClosestWithTag(transform.position, targetTag);
 
         //position
         Vector2 positionOfTarget = targetEntity.transform.position;
@@ -30,8 +30,8 @@ public class EntityController : MonoBehaviour
         bool isWithinDesiredDistance = distanceToTargetEnemy.magnitude <= desiredDistance;
 
         //angles
-        float currentAngle = Mathf.Tan(distanceToTargetEnemy.y/distanceToTargetEnemy.x);
-        currentAngle = Mathf.Abs(currentAngle)*180/Mathf.PI;//convert from radians to positive degrees
+        float currentAngle = Mathf.Tan(distanceToTargetEnemy.y / distanceToTargetEnemy.x);
+        currentAngle = Mathf.Abs(currentAngle) * 180 / Mathf.PI;//convert from radians to positive degrees
         bool isWithinAcceptableAngle = currentAngle < maxAngle;
 
         //moves if distance is too great or the angle beetween the entity and the target is too great.

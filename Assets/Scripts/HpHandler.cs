@@ -15,9 +15,11 @@ public class HpHandler : MonoBehaviour
 
     public void ChangeHp(float amount)
     {
-        float newHp = currentHp+amount;
+        //calculate and apply new Hp
+        float newHp = currentHp + amount;
         newHp = Mathf.Clamp(newHp, 0, maxHp);
         currentHp = newHp;
-        hpSlider.value = currentHp/maxHp;
+        //update ui
+        hpSlider.value = currentHp / maxHp;
     }
 }

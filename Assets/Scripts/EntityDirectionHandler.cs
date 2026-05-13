@@ -2,7 +2,7 @@ using Unity.Mathematics;
 using UnityEngine;
 
 
-public class EntityDirectionHandler : MonoBehaviour
+public class EntityDirectionHandler : MonoBehaviour// handles looking left and right for entities
 {
     Canvas canvas;
     float defaultRotation; //should always be +/- 1
@@ -16,12 +16,13 @@ public class EntityDirectionHandler : MonoBehaviour
 
         canvas = GetComponentInChildren<Canvas>();
 
-        priorityHandler = new(SetRotation,1);
+        priorityHandler = new(SetRotation, 1);
     }
-    //looks towards the given point
-    public void LookAtPosition(Vector2 pos, string key, float priority)
+
+    public void LookAtPosition(Vector2 pos, string key, float priority) //looks towards the given point
     {
         int dir;
+        //checks wheather to look right or left
         if (pos.x > transform.position.x)
         {
             dir = 1;
@@ -38,16 +39,16 @@ public class EntityDirectionHandler : MonoBehaviour
     {
         //uses absolute value to make it not always mirror when set to -1, has the downside of only working if the default X is positive
         float absoluteX = Mathf.Abs(transform.localScale.x);
-        
+
         transform.localScale = new(
-            defaultRotation*rotation*absoluteX,
+            defaultRotation * rotation * absoluteX,
             transform.localScale.y,
             transform.localScale.z
         );
 
         //mirrors the healthbar as well to keep it the same
         canvas.gameObject.transform.localScale = new(
-            math.abs(canvas.gameObject.transform.localScale.x)*rotation,
+            math.abs(canvas.gameObject.transform.localScale.x) * rotation,
             canvas.gameObject.transform.localScale.y,
             canvas.gameObject.transform.localScale.z
         );

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour// handles movement, attacking and ability usage based on playerinput
 {
     Vector2 moveVector = Vector2.zero;
     MovementHandler movementHandler;
@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
+        //move in input direction, if no input, stop moving
         if (moveVector.magnitude == 0)
 
         {
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour
     }
     public void OnAttack(InputValue input)
     {
-        if (input.Get() == null) //input.Get() is always either null(released) or 1(pressed) do not ask me why
+        if (input.Get() == null) //input.Get() is always either null(released) or 1(pressed) I have no idea why
         {
             attackHandler.StopAttacking();
         }
@@ -42,14 +43,14 @@ public class PlayerController : MonoBehaviour
     }
     public void OnAbility(InputValue input)
     {
-        if (input.Get() == null) //input.Get() is always either null(released) or 1(pressed) do not ask me why
+        if (input.Get() == null) //input.Get() is always either null(released) or 1(pressed) I have no idea why
         {
             //do stuff, will be used later
         }
         else
         {
             int value = (int)(float)input.Get();//throws an exception when being cast directly to an int despite the inputsystem being set to outputting an integer, so convertion to float first is necessary.
-            //finds the corresponding playerEntity to call it's battle skill, will probably want to replace since, from my understanding, using tags this way might cause the array to be a different order at different times, atleast after scene change
+            //finds the corresponding playerEntity to call it's battle skill, will probably want to replace since, from my understanding, using tags this way might cause the array to be a different order at different times, atleast after scene change, but this works for now
             GameObject[] playerEntities = GameObject.FindGameObjectsWithTag("PlayerEntity");//uses array since it will never be changing length or content
             if (value < playerEntities.Length)
             {

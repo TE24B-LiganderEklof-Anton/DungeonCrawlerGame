@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AbilityHandler : MonoBehaviour
+public class AbilityHandler : MonoBehaviour //base class for abilityhandlers. primarily for defning protected variable and virtual methods.
 {
     //variables intended for use by this class' subclasses, so that I won't have to bother getting them in every subclass script
     protected string targetTag;
@@ -27,7 +27,7 @@ public class AbilityHandler : MonoBehaviour
         manaHandler = Toolbox.manaHandler;
         eventHandler = GetComponent<EventHandler>();
 
-        //detecting is this script is on the player character
+        //detecting if this script is on the player character
         if (GetComponent<PlayerController>() == null)
         {
             isPlayer = false;

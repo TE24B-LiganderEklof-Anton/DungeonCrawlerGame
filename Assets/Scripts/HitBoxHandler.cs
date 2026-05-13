@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitBoxHandler : MonoBehaviour
+public class HitBoxHandler : MonoBehaviour// general system for handling hitregistration
 {
-    
+
     List<Collider2D> collidersInTrigger = new();// is a list since the amount of object that will exist inside the trigger at a given time is unknown and dynamic length is thereby required
     List<Action<Collider2D>> callbacks = new();// is a list since it allows any number of callbacks to be bound
 
@@ -22,27 +22,26 @@ public class HitBoxHandler : MonoBehaviour
     {
         foreach (Collider2D collision in collidersInTrigger)
         {
-            Hit(callback,collision);
+            Hit(callback, collision);
         }
     }
     void FireCallbacks(Collider2D collision) //calls all callbacks with the given collider as parameter
-    {        
+    {
         foreach (Action<Collider2D> callback in callbacks)
         {
-            Hit(callback,collision);
-        } 
+            Hit(callback, collision);
+        }
     }
     void Hit(Action<Collider2D> callback, Collider2D collision)
     {
         FireWasHitEvent(collision);
         callback(collision);
     }
-    void FireWasHitEvent(Collider2D collision)
+    void FireWasHitEvent(Collider2D collision) //fires the wasHit event if the hit gameobject has a eventa´handler
     {
         GameObject hitGameObject = collision.gameObject;
         EventHandler eventhandler = hitGameObject.GetComponent<EventHandler>();
-        if (eventhandler == null) return;
-        eventhandler.wasHit.Fire(this.gameObject);
+        if (eventhandler != null) eventhandler.wasHit.Fire(this.gameObject); ;
     }
     //called via MoneoBehavior:
     void OnTriggerEnter2D(Collider2D collider)
@@ -53,6 +52,6 @@ public class HitBoxHandler : MonoBehaviour
     void OnTriggerExit2D(Collider2D collision)
     {
         collidersInTrigger.Remove(collision);
-        
+
     }
 }
