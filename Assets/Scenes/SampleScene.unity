@@ -5354,6 +5354,7 @@ GameObject:
   - component: {fileID: 1111816877}
   - component: {fileID: 1111816876}
   - component: {fileID: 1111816886}
+  - component: {fileID: 1111816887}
   m_Layer: 0
   m_Name: AllyKnight
   m_TagString: PlayerEntity
@@ -5550,6 +5551,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 234c0605bbf24d34aa17c738f16bcf7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EventHandler
+--- !u!114 &1111816887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111816875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 704f8f44e3663b343a25133dd7d425f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElementHandler
 --- !u!1 &1118105645
 GameObject:
   m_ObjectHideFlags: 0

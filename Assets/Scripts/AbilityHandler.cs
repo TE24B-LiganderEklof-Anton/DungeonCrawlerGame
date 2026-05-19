@@ -14,7 +14,7 @@ public class AbilityHandler : MonoBehaviour //base class for abilityhandlers. pr
     protected bool isPlayer;
     GameObject weapon;
 
-    void Start()
+    protected void Start()
     {
         //getting components/gameobjects
         movementHandler = GetComponent<MovementHandler>();

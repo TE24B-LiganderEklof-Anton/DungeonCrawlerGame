@@ -17,6 +17,7 @@ public class HitBoxHandler : MonoBehaviour// general system for handling hitregi
     public void Unbind(Action<Collider2D> callback)
     {
         callbacks.Remove(callback);
+        print("Unbind");
     }
     public void FireCollisions(Action<Collider2D> callback) //calls the given callback for all colliders currently in trigger
     {

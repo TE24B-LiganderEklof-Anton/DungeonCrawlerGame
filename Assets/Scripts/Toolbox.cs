@@ -20,6 +20,7 @@ public class Toolbox : MonoBehaviour
     GameObject LightningIconPrefab;
     [SerializeField]
     GameObject NatureIconPrefab;
+
     void Awake()
     {
         manaHandler = manaHandlerObject.GetComponent<ManaHandler>();
@@ -37,6 +38,7 @@ public class Toolbox : MonoBehaviour
         return tag == "PlayerEntity" ? "EnemyEntity" : "PlayerEntity";
     }
     public static GameObject FindClosestWithTag(Vector2 position, string tag)
+
     {
         GameObject[] array = GameObject.FindGameObjectsWithTag(tag);
 
