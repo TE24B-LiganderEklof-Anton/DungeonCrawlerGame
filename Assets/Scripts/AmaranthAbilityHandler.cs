@@ -65,5 +65,4 @@ public class AmaranthAbilityHandler : AbilityHandler
     {
         eventHandler.wasHit.UnBind(OnWasHit);
     }
-
 }
