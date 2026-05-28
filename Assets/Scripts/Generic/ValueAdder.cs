@@ -13,12 +13,13 @@ public class ValueAdder : MonoBehaviour
         {
             newValue += value;
         }
+        float oldValue = currentValue;
+        currentValue = newValue;
         //call onchange method if value actually changed
-        if (newValue != currentValue)
+        if (newValue != oldValue)
         {
             onValueChange(newValue);
         }
-        currentValue = newValue;
     }
     public ValueAdder(Action<float> onValueChangeMethod)
     {

@@ -1,8 +1,9 @@
+using UnityEditor.AnimatedValues;
 using UnityEngine;
 public class StatsHandler: MonoBehaviour {
-    
+    public Stat damageTaken = new(1);
 }
-class Stat
+public class Stat
 {
     public float value = 0;
     public ValueAdder additive;
@@ -11,9 +12,10 @@ class Stat
     {
         value = additive.currentValue * multiplicative.currentValue;
     }
-    public Stat()
+    public Stat(float baseValue)
     {
         additive = new(onChange);
+        additive.SetKey("base", baseValue);
         multiplicative = new(onChange);
     }
 }
